@@ -11,11 +11,7 @@ public partial class Game
     {
         var editorLayer = new InfoLayer(new EditorAssetStorage("Info"), JsonSerializer.Instance);
 
-        var infos = new List<InfoManager>()
-        {
-        };
-        
-        foreach (var info in infos)
+        foreach (var info in InfoLayer.infos)
         {
             editorLayer.RegisterInfo(info);
             info.DirectlyLoadFromExcel();
@@ -23,7 +19,7 @@ public partial class Game
         
         var runtimeLayer = new InfoLayer(new StreamingAssetStorage("Info"), JsonSerializer.Instance);
         
-        foreach (var info in infos)
+        foreach (var info in InfoLayer.infos)
         {
             runtimeLayer.RegisterInfo(info);
             info.SerializeIntoStorage();

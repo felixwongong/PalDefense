@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using cfEngine.Core.Layer;
 using cfEngine.Util;
 
 namespace cfUnityEngine.GameState.Bootstrap
@@ -12,7 +13,10 @@ namespace cfUnityEngine.GameState.Bootstrap
 
         protected internal override void StartContext(GameStateMachine gsm, StateParam param)
         {
-            RegisterInfos();
+            foreach (var info in InfoLayer.infos)
+            {
+                Game.Info.RegisterInfo(info);
+            }
 
             var infoLoadTasks = Game.Info.InfoMap.Values.Select(info => info.LoadSerializedAsync(Game.TaskToken));
             Task.WhenAll(infoLoadTasks).ContinueWith(t =>
@@ -23,11 +27,6 @@ namespace cfUnityEngine.GameState.Bootstrap
                     Token = new LoginToken()
                 });
             }, Game.TaskToken, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
-        }
-
-        private void RegisterInfos()
-        {
-            //Add infos need to be loaded on init here
         }
     }
 }
