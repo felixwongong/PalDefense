@@ -8,6 +8,7 @@ using cfEngine.Logging;
 using cfEngine.Pooling;
 using cfEngine.Serialize;
 using cfEngine.Util;
+using cfUnityEngine.GameState;
 using UnityEngine;
 
 public class GameEntry : MonoBehaviour

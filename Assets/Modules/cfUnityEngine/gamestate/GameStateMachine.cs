@@ -1,27 +1,28 @@
 using cfEngine.Util;
+using cfUnityEngine.GameState.Bootstrap;
 
-public enum GameStateId
+namespace cfUnityEngine.GameState
 {
-    InfoLoad,
-    Login,
-    UserDataLoad,
-    Initialization,
-    Home,
-    Battle,
-}
-
-public abstract class GameState : State<GameStateId, GameState, GameStateMachine>
-{
-}
-
-public class GameStateMachine: StateMachine<GameStateId, GameState, GameStateMachine>
-{
-    public GameStateMachine(): base()
+    public enum GameStateId
     {
-        RegisterState(new InfoLoadState());
-        RegisterState(new LoginState());
-        RegisterState(new UserDataLoadState());
-        RegisterState(new InitializationState());
-        RegisterState(new HomeState());
+        InfoLoad,
+        Login,
+        UserDataLoad,
+        Initialization,
+    }
+
+    public abstract class GameState : State<GameStateId, GameState, GameStateMachine>
+    {
+    }
+
+    public class GameStateMachine : StateMachine<GameStateId, GameState, GameStateMachine>
+    {
+        public GameStateMachine() : base()
+        {
+            RegisterState(new InfoLoadState());
+            RegisterState(new LoginState());
+            RegisterState(new UserDataLoadState());
+            RegisterState(new InitializationState());
+        }
     }
 }

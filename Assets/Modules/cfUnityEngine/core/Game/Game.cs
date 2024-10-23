@@ -3,6 +3,7 @@ using cfEngine.Asset;
 using cfEngine.Core;
 using cfEngine.Core.Layer;
 using cfEngine.Pooling;
+using cfUnityEngine.GameState;
 using Object = UnityEngine.Object;
 
 public partial class Game
