@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.Threading;
+using cfEngine.Asset;
 using cfEngine.Core;
 using cfEngine.Core.Layer;
 using cfEngine.IO;
