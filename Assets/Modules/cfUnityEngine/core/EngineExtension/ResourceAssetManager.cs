@@ -8,7 +8,7 @@ namespace cfEngine.Asset
 {
     public class ResourceAssetManager : AssetManager<UnityEngine.Object>
     {
-        protected override T _Load<T>(string path)
+        protected override AssetHan _Load<T>(string path)
         {
             var asset = Resources.Load<T>(path);
             if (asset == null)
@@ -19,7 +19,7 @@ namespace cfEngine.Asset
             return asset;
         }
 
-        protected override async Task<T> _LoadAsync<T>(string path, CancellationToken token)
+        protected override async Task<AssetHandle<T>> _LoadAsync<T>(string path, CancellationToken token)
         {
             if (token.WaitHandle != null)
             {
