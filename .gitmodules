@@ -1,3 +1,6 @@
 [submodule "Assets/Modules/cfEngine"]
 	path = Assets/Modules/cfEngine
 	url = https://github.com/felixwongong/cfEngine
+[submodule "Assets/Modules/cfUnityEngine"]
+	path = Assets/Modules/cfUnityEngine
+	url = https://github.com/felixwongong/cfUnityEngine
