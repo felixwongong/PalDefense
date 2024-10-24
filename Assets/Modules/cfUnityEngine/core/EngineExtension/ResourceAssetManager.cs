@@ -6,39 +6,39 @@ using UnityEngine;
 
 namespace cfEngine.Asset
 {
-    public class ResourceAssetManager : AssetManager<UnityEngine.Object>
+public class ResourceAssetManager : AssetManager<UnityEngine.Object>
+{
+    protected override AssetHandle<T> _Load<T>(string path)
     {
-        protected override AssetHan _Load<T>(string path)
+        var asset = Resources.Load<T>(path);
+        if (asset == null)
         {
-            var asset = Resources.Load<T>(path);
-            if (asset == null)
-            {
-                throw new ArgumentException($"Asset not found ({path})", nameof(path));
-            }
-
-            return asset;
+            throw new ArgumentException($"Asset not found ({path})", nameof(path));
         }
 
-        protected override async Task<AssetHandle<T>> _LoadAsync<T>(string path, CancellationToken token)
+        return new AssetHandle<T>(asset, () => {});
+    }
+
+    protected override async Task<AssetHandle<T>> _LoadAsync<T>(string path, CancellationToken token)
+    {
+        if (token.WaitHandle != null)
         {
-            if (token.WaitHandle != null)
-            {
-                Log.LogWarning("Resources Load can't really be cancelled");
-            }
+            Log.LogWarning("Resources Load can't really be cancelled");
+        }
 
-            try
-            {
-                var req = Resources.LoadAsync<T>(path);
-                await req;
+        try
+        {
+            var req = Resources.LoadAsync<T>(path);
+            await req;
 
-                var t = (T)req.asset;
-                return t;
-            }
-            catch (Exception e)
-            {
-                Log.LogException(e, $"Resource {path} load failed.");
-                return null;
-            }
+            var t = (T)req.asset;
+            return new AssetHandle<T>(t, () => { });
+        }
+        catch (Exception e)
+        {
+            Log.LogException(e, $"Resource {path} load failed.");
+            return null;
         }
     }
+}
 }
