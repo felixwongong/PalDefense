@@ -763,7 +763,11 @@ PlayerSettings:
   webGLWebAssemblyBigInt: 0
   webGLCloseOnQuit: 0
   webWasm2023: 0
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    Android: CF_ADDRESSABLE;CF_STATISTIC
+    Standalone: CF_ADDRESSABLE;CF_STATISTIC
+    WebGL: CF_ADDRESSABLE;CF_STATISTIC
+    iPhone: CF_ADDRESSABLE;CF_STATISTIC
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
